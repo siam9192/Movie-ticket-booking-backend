@@ -2,7 +2,7 @@ import { z } from "zod"
 
 // Define Zod schema for showTimeSchema
 const showTimeSchemaZod = z.object({
-    date:z.date(),
+    date:z.string().datetime(),
     time: z.string().time()
 })
 
@@ -16,12 +16,15 @@ const sitSchemaZod = z.object({
 export const createShowValidation = z.object({
     movieId: z.string().nonempty(),
     theaterId: z.string(),
+    hallNo:z.string(),
+    hallSitPlaneImage:z.string(),
     showFormat: z.object({
         language: z.string().nonempty(),
         format: z.string().nonempty(),
     }),
-    showTime: showTimeSchemaZod,
+    showTime: z.string().datetime(),
     totalSeat: z.number(),
+    premiumSeats:z.array(z.number()).optional(),
     price: z.number(),
 })
 

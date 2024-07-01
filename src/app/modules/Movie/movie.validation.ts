@@ -24,7 +24,7 @@ const createMovieValidationSchema = z.object({
     movieFormats: z.array(
         z.object({
             language: z.string(),
-            format: z.array(z.string()),
+            formats: z.array(z.string()).nonempty(),
         }),
     ),
 })

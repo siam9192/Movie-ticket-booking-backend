@@ -1,5 +1,6 @@
 import mongoose, { Schema, model } from "mongoose"
-import { TShow, TShowMethods, TShowSeat, TShowTime } from "./show.interface"
+import { TSeatPrice, TShow, TShowMethods, TShowSeat, TShowTime } from "./show.interface"
+import { string } from "joi"
 
 const showTimeSchema = new Schema<TShowTime>({
     date:{
@@ -12,11 +13,35 @@ const showTimeSchema = new Schema<TShowTime>({
     }
 })
 
+
+
 const sitSchema = new Schema<TShowSeat>({
-    seatNumber: Number,
-    isBooked: Boolean,
+    seatNumber: {
+        type:Number,
+        required:true,
+    },
+    seatType:{
+        type:String,
+        enum:["standard","premium"],
+        required:true
+    },
+    isBooked: {
+        type:Boolean,
+        default:false
+    }
 })
 
+
+const seatPriceSchema = new Schema<TSeatPrice>({
+    standard:{
+        type:Number,
+        default:null
+    },
+    premium:{
+        type:Number,
+        default:null
+    }
+})
 const showSchema = new Schema<TShow>(
     {
         movieId: {
@@ -38,15 +63,26 @@ const showSchema = new Schema<TShow>(
             type: mongoose.Schema.Types.ObjectId,
             required: true,
         },
+        hallNo:{
+            type:String,
+            required:true
+        },
+        hallSitPlaneImage:{
+            type:String,
+            required:true
+        },
         showTime: {
-            type: showTimeSchema,
+            type: Date,
             required: true,
         },
         seats: {
             type: [sitSchema],
             required: true,
         },
-        price: Number,
+        price: {
+            type:seatPriceSchema,
+            required:true
+        },
         isRunning: {
             type: Boolean,
             default: true,

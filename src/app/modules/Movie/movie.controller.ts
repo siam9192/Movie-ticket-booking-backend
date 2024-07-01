@@ -4,8 +4,9 @@ import movieService from "./movie.service"
 import { ApiResponse } from "../../utils/response"
 
 const createMovie = catchAsync(async (req: Request, res: Response) => {
-    const movieData = req.body.data
-    const result = await movieService.createMovieIntoDb(movieData)
+    const payload = req.body
+    console.log(payload)
+    const result = await movieService.createMovieIntoDb(payload)
     ApiResponse.sendResponse(res, {
         statusCode: 200,
         message: "Movie is created successfully",

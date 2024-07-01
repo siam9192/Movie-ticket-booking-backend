@@ -10,18 +10,40 @@ export type TShowTime = {
     time: string;
 }
 export type TShowSeat = {
-    seatNumber: number
-    isBooked: boolean
+    seatNumber: number;
+    seatType:"standard" | "premium";
+    isBooked: boolean;
+
 }
-export interface TShow<> {
-    movieId: mongoose.Types.ObjectId
-    theaterId: mongoose.Types.ObjectId
-    showTime: TShowTime
-    showFormat: TShowFormat
-    seats: TShowSeat[]
-    price: number
-    isRunning?: boolean
-    isDeleted?: boolean
+export type TSeatPrice = {
+    standard:number;
+    premium:number;
+}
+export interface TShow {
+    movieId: mongoose.Types.ObjectId;
+    theaterId: mongoose.Types.ObjectId;
+    hallNo:string;
+    hallSitPlaneImage:string;
+    showTime: Date;
+    showFormat: TShowFormat;
+    seats: TShowSeat[];
+    price: TSeatPrice;
+    isRunning?: boolean;
+    isDeleted?: boolean;
+}
+
+export interface TShowRequestData {
+    movieId: mongoose.Types.ObjectId;
+    theaterId: mongoose.Types.ObjectId;
+    hallNo:string;
+    hallSitPlaneImage:string;
+    showTime: string;
+    showFormat: TShowFormat;
+    totalSeat:number;
+    standardSeats: number[];
+    premiumSeats: number[];
+    price: TSeatPrice;
+  
 }
 
 export interface TShowMethods extends Model<TShow> {
