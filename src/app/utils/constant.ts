@@ -29,8 +29,8 @@ const transporter = nodemailer.createTransport({
     port: 587,
     secure: false, // Use `true` for port 465, `false` for all other ports
     auth: {
-        user: "owsaamgaming@gmail.com",
-        pass: "gilp adld kigj rmds",
+        user: config.app_user_name,
+        pass: config.app_pass_key,
     },
 })
 
@@ -108,7 +108,7 @@ const emailHtml = (otp: string) => {
 }
 export const sendEMail = async (emailAddress: string, otp: string) => {
     await transporter.sendMail({
-        from: "owsaamgaming@gmail.com",
+        from: "MovieBuzz.email",
         to: emailAddress,
         subject: "Verify your account",
         html: emailHtml(otp),

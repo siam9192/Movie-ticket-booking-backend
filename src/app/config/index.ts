@@ -9,4 +9,6 @@ export default {
     bcrypt_round_number: process.env.BCRYPT_ROUND_NUMBER,
     default_password: process.env.DEFAULT_PASSWORD,
     otp_secret: process.env.OTP_SECRET_TOKEN,
+    app_user_name: process.env.APP_USER_NAME,
+    app_pass_key: process.env.APP_PASS_KEY
 }

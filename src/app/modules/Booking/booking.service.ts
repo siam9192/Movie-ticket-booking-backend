@@ -16,10 +16,9 @@ const createBookingIntoDB = async (payload: TBooking) => {
     }
 
     // Checking is the seat available
-    console.log(payload.seats)
     for (const sitNumber of payload.seats) {
         const sit = show.seats.find((ele) => ele.seatNumber === sitNumber)
-        console.log(sitNumber)
+        
         if (sit && sit.isBooked) {
             throw new AppError(400, `Sit number ${sitNumber} is already booked`)
         } else {
